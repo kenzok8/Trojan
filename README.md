@@ -26,6 +26,7 @@
 - cd /usr/src && wget -N --no-check-certificate "https://raw.githubusercontent.com/kenzok8/Trojan/master/tcp.sh" && chmod +x tcp.sh && ./tcp.sh
 
 - 其余注意事项如下：
+
 1、系统支持centos7+/debian9+/ubuntu16+
 
 2、域名需要解析到VPS需要时间生效，建议留10分钟；
