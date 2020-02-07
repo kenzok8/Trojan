@@ -1,11 +1,9 @@
-# Trojan
+  # Trojan
 
 
-- 注意
+## 说明
 
-- vps上需要安装curl
-
-- Ubuntu/Debian 系统安装 Curl 方法
+- vps上需要安装curl  Ubuntu/Debian 系统安装 Curl 方法
 
 - apt-get update -y && apt-get install curl -y    
 
@@ -16,7 +14,7 @@
 - 80端口被Nginx点用使用命令 service nginx stop 停用
 
 
- Trojan一键安装脚本二选一:
+## Trojan一键安装脚本二选一:
 
 - curl -O https://raw.githubusercontent.com/kenzok8/Trojan/master/mu.sh && chmod +x mu.sh && ./mu.sh
 
@@ -28,7 +26,7 @@
 
 - cd /usr/src && wget -N --no-check-certificate "https://raw.githubusercontent.com/kenzok8/Trojan/master/tcp.sh" && chmod +x tcp.sh && ./tcp.sh
 
-- 其余注意事项如下：
+## 注意
 
 1、系统支持centos7+/debian9+/ubuntu16+
 
@@ -41,6 +39,8 @@
 5、trojan不能用CDN，不要开启CDN；
 
 6、如果你在用谷歌云需要注意防火墙出入站规则设置并给80和443访问权限。
+
+## 结尾
 
 - 电脑上其他软件如何使用 Trojan
 
@@ -58,3 +58,4 @@ nano/usr/src/trojan/server.conf (没有nano请调用vi命令)
 
 systemctl restart trojan
 
+## 视图
