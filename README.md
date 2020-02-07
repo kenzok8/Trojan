@@ -59,3 +59,8 @@ nano/usr/src/trojan/server.conf (没有nano请调用vi命令)
 systemctl restart trojan
 
 ## 视图
+![Trojan脚本运行](https://github.com/kenzok8/Trojan/blob/master/sshot/sshot-1.png)
+![BBR脚本运行](https://github.com/kenzok8/Trojan/blob/master/sshot/sshot-2.png)
+![BBR脚本运行1](https://github.com/kenzok8/Trojan/blob/master/sshot/sshot-3.png)
+
+
