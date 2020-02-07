@@ -16,9 +16,12 @@
 - 80端口被Nginx点用使用命令 service nginx stop 停用
 
 
- Trojan一键安装脚本:
+ Trojan一键安装脚本二选一:
 
 - curl -O https://raw.githubusercontent.com/kenzok8/Trojan/master/mu.sh && chmod +x mu.sh && ./mu.sh
+
+
+- bash <(curl -s -L https://raw.githubusercontent.com/kenzok8/Trojan/master/mu.sh)
 
 
  BBR加速(可选):
