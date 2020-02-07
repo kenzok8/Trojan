@@ -7,7 +7,7 @@ export PATH
 #	Description: BBR+BBR魔改版+BBRplus+Lotserver
 #	Version: 2.0.9
 #	Author: kenzo
-#	github: https://github.com/kenzok8/Trojan/
+#	github: https://github.com/kenzok8/Trojan
 #=================================================
 
 sh_ver="2.0.9"
