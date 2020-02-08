@@ -32,7 +32,7 @@ cd /usr/src && wget -N --no-check-certificate "https://raw.githubusercontent.com
 
 1、系统支持centos7+/debian9+/ubuntu16+
 
-2、域名需要解析到VPS需要时间生效，建议留10分钟；
+2、域名解析到VPS需要间生效，建议留10分钟,用cloudflare解析，能良好支持TLS；
 
 3、脚本自动续签https证书；
 
