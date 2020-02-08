@@ -59,7 +59,6 @@ nano/usr/src/trojan/server.conf (没有nano请调用vi命令)
 
 修改完成后，重启 trojan 服务端即可，同时客户端的密码也要同步修改哦。
 
-
 systemctl restart trojan
 ```
 
@@ -67,6 +66,6 @@ systemctl restart trojan
 ![Trojan脚本运行](https://github.com/kenzok8/Trojan/blob/master/sshot/sshot-1.png)
 ![BBR脚本运行](https://github.com/kenzok8/Trojan/blob/master/sshot/sshot-2.png)
 ![BBR脚本运行1](https://github.com/kenzok8/Trojan/blob/master/sshot/sshot-3.png)
-![cf设置截图](https://github.com/kenzok8/Trojan/blob/master/sshot/sshot-3.png)
+![cf设置截图](https://github.com/kenzok8/Trojan/blob/master/sshot/sshot-4.png)
 
 
