@@ -24,7 +24,9 @@ bash <(curl -s -L https://raw.githubusercontent.com/kenzok8/Trojan/master/mu.sh)
 
  BBR加速(可选):
 
-- cd /usr/src && wget -N --no-check-certificate "https://raw.githubusercontent.com/kenzok8/Trojan/master/tcp.sh" && chmod +x tcp.sh && ./tcp.sh
+```bash
+cd /usr/src && wget -N --no-check-certificate "https://raw.githubusercontent.com/kenzok8/Trojan/master/tcp.sh" && chmod +x tcp.sh && ./tcp.sh
+```
 
 ## 注意
 
