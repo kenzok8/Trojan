@@ -17,9 +17,9 @@
 ## Trojan一键安装脚本二选一:
 
 ```bash
-curl -O https://raw.githubusercontent.com/kenzok8/Trojan/master/mu.sh && chmod +x mu.sh && ./mu.sh
+curl -O https://git.io/Jvc32 && chmod +x mu.sh && ./mu.sh
 
-bash <(curl -s -L https://raw.githubusercontent.com/kenzok8/Trojan/master/mu.sh)
+bash <(curl -s -L https://git.io/Jvc32)
 ```
 
  BBR加速(可选):
