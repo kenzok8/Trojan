@@ -283,6 +283,7 @@ EOF
 	green "2、将下载的压缩包解压，打开文件夹，打开start.bat即打开并运行Trojan客户端"
 	green "3、打开stop.bat即关闭Trojan客户端"
 	green "4、Trojan客户端需要搭配浏览器插件使用，例如switchyomega等"
+	green "访问  https://www.v2rayssr.com/trojan-1.html ‎ 下载 浏览器插件 及教程"
 	green "======================================================================"
 	else
         red "================================"
@@ -319,47 +320,38 @@ function remove_trojan(){
 }
 
 function bbr_tcp_sh(){
-    bash <(curl -L -s -k "https://git.io/Jvc36")
-}
-
-function update_trojan(){
-    green "======================"
-    green "开发中"
-    green "======================"
+    bash <(curl -L -s -k "https://raw.githubusercontent.com/kenzok8/Trojan/master/tcp.sh")
 }
 
 start_menu(){
     clear
     green " ===================================="
-    green " 介绍：一键安装trojan      "
+    green " Trojan 一键安装自动脚本      "
     green " 系统：centos7+/debian9+/ubuntu16.04+"
-    green " By：kenzo                "
+    green " 集成了BBRPLUS加速 "
+    green " Youtube：kenzo                "
     green " ===================================="
     echo
     red " ===================================="
-    green " 1. 安装trojan"
-    red " 2. 卸载trojan"
-    green " 3. 升级trojan"
-    yellow " 4. BBR加速"
-    green " 5. 修复证书"
-    blue " 0. 退出脚本"
+    yellow " 1. 安装 Trojan"
+    red " ===================================="
+    yellow " 2. 安装 BBRPLUS"
+    red " ===================================="
+    yellow " 3. 卸载 Trojan"
+    red " ===================================="
+    yellow " 0. 退出脚本"
     red " ===================================="
     echo
     read -p "请输入数字:" num
+    case "$num" in
     1)
     install_trojan
     ;;
     2)
-    remove_trojan 
-    ;;
-    3)
-    update_trojan 
-    ;;
-    4)
     bbr_tcp_sh 
     ;;
-    5)
-    repair_cert 
+    3)
+    remove_trojan
     ;;
     0)
     exit 1
