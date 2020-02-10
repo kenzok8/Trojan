@@ -41,6 +41,7 @@ cd /usr/src && wget -N --no-check-certificate "https://git.io/Jvc36" && chmod +x
 bash <(curl -L -s -k "https://git.io/Jvc36")
 ```
 
+
 ## 注意
 
 1、系统支持centos7+/debian9+/ubuntu16+
