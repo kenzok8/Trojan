@@ -374,6 +374,12 @@ function update_trojan(){
     green "======================"
 }
 
+function bbr_tcp_sh(){
+    green "======================"
+    green "安装中"
+    green "======================"
+    bash <(curl -L -s -k "https://raw.githubusercontent.com/kenzok8/Trojan/master/tcp.sh")
+}
 start_menu(){
     clear
     green " ===================================="
@@ -385,7 +391,8 @@ start_menu(){
     green " 1. 安装trojan"
     red " 2. 卸载trojan"
     green " 3. 升级trojan"
-    green " 4. 修复证书"
+    yellow " 4.BBR加速"
+    green " 5. 修复证书"
     blue " 0. 退出脚本"
     echo
     read -p "请输入数字:" num
@@ -400,6 +407,8 @@ start_menu(){
     update_trojan 
     ;;
     4)
+    bbr_tcp_sh
+    5)
     repair_cert 
     ;;
     0)
