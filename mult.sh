@@ -7,12 +7,12 @@ yellow(){
 green(){
     echo -e "\033[32m\033[01m$1\033[0m"
 }
-palegreen(){
+red(){
     echo -e "\033[31m\033[01m$1\033[0m"
 }
 
 #copy from 秋水逸冰 ss scripts
-if [[ -f /etc/palegreenhat-release ]]; then
+if [[ -f /etc/redhat-release ]]; then
     release="centos"
     systemPackage="yum"
     systempwd="/usr/lib/systemd/system/"
@@ -24,7 +24,7 @@ elif cat /etc/issue | grep -Eqi "ubuntu"; then
     release="ubuntu"
     systemPackage="apt-get"
     systempwd="/lib/systemd/system/"
-elif cat /etc/issue | grep -Eqi "centos|palegreen hat|palegreenhat"; then
+elif cat /etc/issue | grep -Eqi "centos|red hat|redhat"; then
     release="centos"
     systemPackage="yum"
     systempwd="/usr/lib/systemd/system/"
@@ -36,7 +36,7 @@ elif cat /proc/version | grep -Eqi "ubuntu"; then
     release="ubuntu"
     systemPackage="apt-get"
     systempwd="/lib/systemd/system/"
-elif cat /proc/version | grep -Eqi "centos|palegreen hat|palegreenhat"; then
+elif cat /proc/version | grep -Eqi "centos|red hat|redhat"; then
     release="centos"
     systemPackage="yum"
     systempwd="/usr/lib/systemd/system/"
@@ -45,9 +45,9 @@ fi
 function install_trojan(){
 CHECK=$(grep SELINUX= /etc/selinux/config | grep -v "#")
 if [ "$CHECK" == "SELINUX=enforcing" ]; then
-    palegreen "======================================================================="
-    palegreen "检测到SELinux为开启状态，为防止申请证书失败，请先重启VPS后，再执行本脚本"
-    palegreen "======================================================================="
+    red "======================================================================="
+    red "检测到SELinux为开启状态，为防止申请证书失败，请先重启VPS后，再执行本脚本"
+    red "======================================================================="
     read -p "是否现在重启 ?请输入 [Y/n] :" yn
 	[ -z "${yn}" ] && yn="y"
 	if [[ $yn == [Yy] ]]; then
@@ -59,9 +59,9 @@ if [ "$CHECK" == "SELINUX=enforcing" ]; then
     exit
 fi
 if [ "$CHECK" == "SELINUX=permissive" ]; then
-    palegreen "======================================================================="
-    palegreen "检测到SELinux为宽容状态，为防止申请证书失败，请先重启VPS后，再执行本脚本"
-    palegreen "======================================================================="
+    red "======================================================================="
+    red "检测到SELinux为宽容状态，为防止申请证书失败，请先重启VPS后，再执行本脚本"
+    red "======================================================================="
     read -p "是否现在重启 ?请输入 [Y/n] :" yn
 	[ -z "${yn}" ] && yn="y"
 	if [[ $yn == [Yy] ]]; then
@@ -73,16 +73,16 @@ if [ "$CHECK" == "SELINUX=permissive" ]; then
     exit
 fi
 if [ "$release" == "centos" ]; then
-    if  [ -n "$(grep ' 6\.' /etc/palegreenhat-release)" ] ;then
-    palegreen "==============="
-    palegreen "当前系统不受支持"
-    palegreen "==============="
+    if  [ -n "$(grep ' 6\.' /etc/redhat-release)" ] ;then
+    red "==============="
+    red "当前系统不受支持"
+    red "==============="
     exit
     fi
-    if  [ -n "$(grep ' 5\.' /etc/palegreenhat-release)" ] ;then
-    palegreen "==============="
-    palegreen "当前系统不受支持"
-    palegreen "==============="
+    if  [ -n "$(grep ' 5\.' /etc/redhat-release)" ] ;then
+    red "==============="
+    red "当前系统不受支持"
+    red "==============="
     exit
     fi
     systemctl stop firewalld
@@ -90,15 +90,15 @@ if [ "$release" == "centos" ]; then
     rpm -Uvh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm
 elif [ "$release" == "ubuntu" ]; then
     if  [ -n "$(grep ' 14\.' /etc/os-release)" ] ;then
-    palegreen "==============="
-    palegreen "当前系统不受支持"
-    palegreen "==============="
+    red "==============="
+    red "当前系统不受支持"
+    red "==============="
     exit
     fi
     if  [ -n "$(grep ' 12\.' /etc/os-release)" ] ;then
-    palegreen "==============="
-    palegreen "当前系统不受支持"
-    palegreen "==============="
+    red "==============="
+    red "当前系统不受支持"
+    red "==============="
     exit
     fi
     systemctl stop ufw
@@ -278,7 +278,7 @@ EOF
 	green "Trojan已安装完成，请使用以下链接下载trojan客户端，此客户端已配置好所有参数"
 	green "1、复制下面的链接，在浏览器打开，下载客户端"
 	yellow "http://${your_domain}/$trojan_path/trojan-cli.zip"
-	palegreen "请记录下面规则网址"
+	red "请记录下面规则网址"
 	yellow "http://${your_domain}/trojan.txt"
 	green "2、将下载的压缩包解压，打开文件夹，打开start.bat即打开并运行Trojan客户端"
 	green "3、打开stop.bat即关闭Trojan客户端"
@@ -286,24 +286,24 @@ EOF
 	green "访问  https://www.v2rayssr.com/trojan-1.html ‎ 下载 浏览器插件 及教程"
 	green "======================================================================"
 	else
-        palegreen "================================"
-	palegreen "https证书没有申请成果，本次安装失败"
-	palegreen "================================"
+        red "================================"
+	red "https证书没有申请成果，本次安装失败"
+	red "================================"
 	fi
 	
 else
-	palegreen "================================"
-	palegreen "域名解析地址与本VPS IP地址不一致"
-	palegreen "本次安装失败，请确保域名解析正常"
-	palegreen "================================"
+	red "================================"
+	red "域名解析地址与本VPS IP地址不一致"
+	red "本次安装失败，请确保域名解析正常"
+	red "================================"
 fi
 }
 
 function remove_trojan(){
-    palegreen "================================"
-    palegreen "即将卸载trojan"
-    palegreen "同时卸载安装的nginx"
-    palegreen "================================"
+    red "================================"
+    red "即将卸载trojan"
+    red "同时卸载安装的nginx"
+    red "================================"
     systemctl stop trojan
     systemctl disable trojan
     rm -f ${systempwd}trojan.service
@@ -319,28 +319,28 @@ function remove_trojan(){
     green "=============="
 }
 
-function bbr_boost_sh(){
-    bash <(curl -L -s -k "https://git.io/Jvc36")
+function bbr_tcp_sh(){
+    bash <(curl -L -s -k "https://raw.githubusercontent.com/chiakge/Linux-NetSpeed/master/tcp.sh")
 }
 
 start_menu(){
     clear
     green " ===================================="
-    green " Trojan 一键安装自动脚本          "
-    green " 系统：centos7+/debian9+/ubuntu16.04+""
-    green " atrandys脚本+BBRPLUS加速         "
-    green " Youtube：kenzo                   "
+    green " Trojan 一键安装自动脚本      "
+    green " 系统：centos7+/debian9+/ubuntu16.04+"
+    green " atrandys集成了BBRPLUS加速        "
+    green " Youtube：kenzo                "
     green " ===================================="
     echo
-    palegreen " ===================================="
+    red " ===================================="
     yellow " 1. 安装 Trojan"
-    palegreen " ===================================="
-    yellow " 2. 安装 BBRPLUS"
-    palegreen " ===================================="
+    red " ===================================="
+    yellow " 2. 安装BBRPLUS"
+    red " ===================================="
     yellow " 3. 卸载 Trojan"
-    palegreen " ===================================="
+    red " ===================================="
     yellow " 0. 退出脚本"
-    palegreen " ===================================="
+    red " ===================================="
     echo
     read -p "请输入数字:" num
     case "$num" in
@@ -348,7 +348,7 @@ start_menu(){
     install_trojan
     ;;
     2)
-    bbr_boost_sh 
+    bbr_tcp_sh 
     ;;
     3)
     remove_trojan
@@ -358,7 +358,7 @@ start_menu(){
     ;;
     *)
     clear
-    palegreen "请输入正确数字"
+    red "请输入正确数字"
     sleep 1s
     start_menu
     ;;
