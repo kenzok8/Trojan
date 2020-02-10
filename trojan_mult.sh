@@ -367,16 +367,15 @@ function remove_trojan(){
     green "trojan删除完毕"
     green "=============="
 }
-
+function bbr_tcp_sh(){
+    bash <(curl -L -s -k "https://raw.githubusercontent.com/kenzok8/Trojan/master/tcp.sh")
+}
 function update_trojan(){
     green "======================"
     green "开发中"
     green "======================"
 }
 
-function bbr_tcp_sh(){
-    bash <(curl -L -s -k "https://raw.githubusercontent.com/kenzok8/Trojan/master/tcp.sh")
-}
 start_menu(){
     clear
     green " ===================================="
@@ -399,12 +398,13 @@ start_menu(){
     ;;
     2)
     remove_trojan 
-    ;; 
+    ;;
     3)
     update_trojan 
     ;;
     4)
-    bbr_tcp_sh
+    bbr_tcp_sh 
+    ;;
     5)
     repair_cert 
     ;;
