@@ -399,7 +399,7 @@ start_menu(){
     ;;
     2)
     remove_trojan 
-    ;;
+    ;; 
     3)
     update_trojan 
     ;;
