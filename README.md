@@ -25,7 +25,7 @@ bash <(curl -s -L https://git.io/Jvc32)
 - atrandys脚本修改
 
 ```bash
-curl -O https://raw.githubusercontent.com/kenzok8/Trojan/master/trojan_mult.shE && chmod +x trojan_mult.sh && ./trojan_mult.sh
+curl -O https://git.io/JvcME && chmod +x trojan_mult.sh && ./trojan_mult.sh
 ```
 ```bash
 bash <(curl -s -L https://git.io/JvcME)
