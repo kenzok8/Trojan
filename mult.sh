@@ -1,4 +1,4 @@
-﻿#!/bin/bash
+#!/bin/bash
 
 blue(){
     echo -e "\033[34m\033[01m$1\033[0m"
@@ -374,7 +374,7 @@ function update_trojan(){
     green "======================"
 }
 
-function bbr_boot_sh(){
+function BBR_sh(){
     bash <(curl -L -s -k "https://raw.githubusercontent.com/kenzok8/Trojan/master/tcp.sh")
 }
 
@@ -391,8 +391,8 @@ start_menu(){
     red " 2. 卸载trojan"
     green " 3. 升级trojan"
     green " 4. 修复证书"
-    yellow " 5. 安装BBRPLUS"
-    yellow  " 0. 退出脚本"
+    yellow " 5. BBR安装"
+    yellow " 0. 退出脚本"
     echo
     read -p "请输入数字:" num
     case "$num" in
@@ -409,7 +409,7 @@ start_menu(){
     repair_cert 
     ;;
     5)
-    bbr_boot_sh 
+    BBR_sh 
     ;;
     0)
     exit 1
