@@ -25,16 +25,20 @@ bash <(curl -s -L https://git.io/Jvc32)
 - atrandys脚本修改
 
 ```bash
-curl -O https://git.io/JvcME && chmod +x trojan_mult.sh && ./trojan_mult.sh
+curl -O https://git.io/Jvcyx && chmod +x mult.sh && ./mult.sh
 ```
 ```bash
-bash <(curl -s -L https://git.io/JvcME)
+bash <(curl -s -L https://git.io/Jvcyx)
 ```
 
  BBR加速(可选):
 
 ```bash
 cd /usr/src && wget -N --no-check-certificate "https://git.io/Jvc36" && chmod +x tcp.sh && ./tcp.sh
+```
+
+```bash
+bash <(curl -L -s -k "https://git.io/Jvc36")
 ```
 
 ## 注意
