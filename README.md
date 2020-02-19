@@ -25,9 +25,6 @@ bash <(curl -s -L https://git.io/Jvc32)
 - atrandys脚本修改
 
 ```bash
-curl -O https://git.io/Jvcyx && chmod +x mult.sh && ./mult.sh
-```
-```bash
 bash <(curl -s -L https://git.io/Jvcyx)
 ```
 
