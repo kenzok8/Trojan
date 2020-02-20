@@ -76,7 +76,9 @@ systemctl restart trojan
 ```
 ![密码修改](https://github.com/kenzok8/Trojan/blob/master/sshot/sshot-5.png)
 
-##### 视图
+##### 建议国域名去cf设置解析
+ 
+ - 地址 https://www.cloudflare.com/
 
 ![cf设置截图](https://github.com/kenzok8/Trojan/blob/master/sshot/sshot-4.png)
 
