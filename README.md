@@ -27,6 +27,7 @@ bash <(curl -s -L https://git.io/Jvc32)
 ```bash
 bash <(curl -s -L https://git.io/Jvcyx)
 ```
+![密码修改](https://github.com/kenzok8/Trojan/blob/master/sshot/sshot-5.png)
 
  BBR加速(可选):
 
