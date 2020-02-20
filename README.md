@@ -1,7 +1,7 @@
-  # Trojan
+#### Trojan one key
 
 
-## 说明
+##### 说明
 
 - vps上需要安装curl  Ubuntu/Debian 系统安装 Curl 方法
 
@@ -14,7 +14,7 @@
 - 80端口被Nginx点用使用命令 service nginx stop 停用
 
 
-## Trojan一键安装脚本二选一:
+##### Trojan一键安装脚本二选一:
 
 ```bash
 curl -O https://git.io/Jvc32 && chmod +x mu.sh && ./mu.sh
@@ -39,7 +39,7 @@ bash <(curl -L -s -k "https://git.io/Jvc36")
 ```
 
 
-## 注意
+##### 注意
 
 1、系统支持centos7+/debian9+/ubuntu16+
 
@@ -53,7 +53,7 @@ bash <(curl -L -s -k "https://git.io/Jvc36")
 
 6、如果你在用谷歌云需要注意防火墙出入站规则设置并给80和443访问权限。
 
-## 结尾
+##### 结尾
 
 - 电脑上其他软件如何使用 Trojan
 
@@ -72,8 +72,7 @@ nano/usr/src/trojan/server.conf (没有nano请调用vi命令)
 
 systemctl restart trojan
 ```
-
-## 视图
+##### 视图
 ![Trojan脚本运行](https://github.com/kenzok8/Trojan/blob/master/sshot/sshot-1.png)
 ![BBR脚本运行](https://github.com/kenzok8/Trojan/blob/master/sshot/sshot-2.png)
 ![BBR脚本运行1](https://github.com/kenzok8/Trojan/blob/master/sshot/sshot-3.png)
