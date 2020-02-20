@@ -66,7 +66,7 @@ bash <(curl -L -s -k "https://git.io/Jvc36")
 trojan 服务端配置文件路径如下，如需修改内容，修改以下文件即可。
 
 ```bash
-nano/usr/src/trojan/server.conf (没有nano请调用vi命令)
+nano /usr/src/trojan/server.conf (没有nano请调用vi命令)
 
 修改完成后，重启 trojan 服务端即可，同时客户端的密码也要同步修改哦。
 
