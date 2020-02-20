@@ -29,8 +29,6 @@ bash <(curl -s -L https://git.io/Jvcyx)
 ```
 ![Trojan脚本运行](https://github.com/kenzok8/Trojan/blob/master/sshot/sshot-1.png)
 
-![密码修改](https://github.com/kenzok8/Trojan/blob/master/sshot/sshot-5.png)
-
  BBR加速(可选):
 
 ```bash
@@ -76,6 +74,8 @@ nano /usr/src/trojan/server.conf (没有nano请调用vi命令)
 
 systemctl restart trojan
 ```
+![密码修改](https://github.com/kenzok8/Trojan/blob/master/sshot/sshot-5.png)
+
 ##### 视图
 
 ![cf设置截图](https://github.com/kenzok8/Trojan/blob/master/sshot/sshot-4.png)
