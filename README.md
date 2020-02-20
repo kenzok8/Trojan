@@ -27,6 +27,8 @@ bash <(curl -s -L https://git.io/Jvc32)
 ```bash
 bash <(curl -s -L https://git.io/Jvcyx)
 ```
+![Trojan脚本运行](https://github.com/kenzok8/Trojan/blob/master/sshot/sshot-1.png)
+
 ![密码修改](https://github.com/kenzok8/Trojan/blob/master/sshot/sshot-5.png)
 
  BBR加速(可选):
@@ -38,7 +40,8 @@ cd /usr/src && wget -N --no-check-certificate "https://git.io/Jvc36" && chmod +x
 ```bash
 bash <(curl -L -s -k "https://git.io/Jvc36")
 ```
-
+![BBR脚本运行](https://github.com/kenzok8/Trojan/blob/master/sshot/sshot-2.png)
+![BBR脚本运行1](https://github.com/kenzok8/Trojan/blob/master/sshot/sshot-3.png)
 
 ##### 注意
 
@@ -74,9 +77,7 @@ nano /usr/src/trojan/server.conf (没有nano请调用vi命令)
 systemctl restart trojan
 ```
 ##### 视图
-![Trojan脚本运行](https://github.com/kenzok8/Trojan/blob/master/sshot/sshot-1.png)
-![BBR脚本运行](https://github.com/kenzok8/Trojan/blob/master/sshot/sshot-2.png)
-![BBR脚本运行1](https://github.com/kenzok8/Trojan/blob/master/sshot/sshot-3.png)
+
 ![cf设置截图](https://github.com/kenzok8/Trojan/blob/master/sshot/sshot-4.png)
 
 
