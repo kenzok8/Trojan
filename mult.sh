@@ -403,7 +403,7 @@ function bbr_tcp_sh(){
 start_menu(){
     clear
     green " ======================================="
-    green " 介绍：一键安装trojan      "
+    green " 介绍：一键安装trojan 3月1日更新版 "
     green " 系统：centos7+/debian9+/ubuntu16.04+"
     yellow " *请不要有其他程序占用80和443端口"
     yellow " *若是第二次使用脚本，请先执行卸载trojan"
