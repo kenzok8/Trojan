@@ -29,7 +29,7 @@ bash <(curl -s -L https://git.io/Jvc32)
 ```bash
 bash <(curl -s -L https://git.io/Jvcyx)
 ```
-![Trojan脚本运行](https://github.com/kenzok8/Trojan/blob/master/sshot/sshot-7.png)
+![Trojan脚本运行](https://github.com/kenzok8/Trojan/blob/master/sshot/2.png)
 
  BBR加速(可选):
 
