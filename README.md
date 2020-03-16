@@ -40,7 +40,7 @@ cd /usr/src && wget -N --no-check-certificate "https://git.io/Jvc36" && chmod +x
 ```bash
 bash <(curl -L -s -k "https://git.io/Jvc36")
 ```
-![BBR脚本运行](https://github.com/kenzok8/Trojan/blob/master/sshot/sshot-8.png)
+![BBR脚本运行](https://github.com/kenzok8/Trojan/blob/master/sshot/3.png)
 ![BBR脚本运行1](https://github.com/kenzok8/Trojan/blob/master/sshot/sshot-3.png)
 
 ##### 注意
