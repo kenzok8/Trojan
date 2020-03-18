@@ -21,6 +21,8 @@
 ```bash
 curl -O https://git.io/Jvc32 && chmod +x mu.sh && ./mu.sh
 ```
+或者
+
 ```bash
 bash <(curl -s -L https://git.io/Jvc32)
 ```
