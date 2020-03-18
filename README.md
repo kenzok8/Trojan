@@ -78,6 +78,7 @@ trojan 服务端配置文件路径如下，如需修改内容，修改以下文�
 nano /usr/src/trojan/server.conf (没有nano请调用vi命令)
 
 修改完成后，重启 trojan 服务端即可，同时客户端的密码也要同步修改哦。
+
 systemctl start trojan    #启动 Trojan
 systemctl restart trojan  #重启 Trojan
 systemctl enable trojan   #设置 Trojan 为开机自启
