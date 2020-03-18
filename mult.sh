@@ -1,5 +1,5 @@
 #!/bin/bash
-＃字体颜色
+
 blue(){
     echo -e "\033[34m\033[01m$1\033[0m"
 }
@@ -7,7 +7,7 @@ green(){
     echo -e "\033[32m\033[01m$1\033[0m"
 }
 yellow(){
-    echo -e "\033[40m\033[01m$1\033[0m"
+    echo -e "\033[33m\033[01m$1\033[0m"
 }
 #copy from 秋水逸冰 ss scripts
 if [[ -f /etc/yellowhat-release ]]; then
