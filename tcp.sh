@@ -5,11 +5,11 @@ export PATH
 #=================================================
 #	System Required: CentOS 6/7/8,Debian 8/9/10,ubuntu 16/18/19
 #	Description: BBR+BBRplus+Lotserver
-#	Version: 1.3.2.14
+#	Version: 1.3.2.20
 #	Author: kenzo
 #=================================================
 
-sh_ver="1.3.2.14"
+sh_ver="1.3.2.20"
 github="github.000060000.xyz"
 
 Green_font_prefix="\033[32m" && Red_font_prefix="\033[31m" && Green_background_prefix="\033[42;37m" && Red_background_prefix="\033[41;37m" && Font_color_suffix="\033[0m"
@@ -40,13 +40,13 @@ installbbr(){
 		
 		elif [[ ${version} = "7" ]]; then
 			if [[ ${bit} = "x86_64" ]]; then
-				wget -N -O kernel-headers-c7.rpm https://github.com/ylx2016/kernel/releases/download/5.5.7/kernel-headers-5.5.7-1-c7.x86_64.rpm
-				wget -N -O kernel-c7.rpm https://github.com/ylx2016/kernel/releases/download/5.5.7/kernel-5.5.7-1-c7.x86_64.rpm
+				wget -N -O kernel-headers-c7.rpm https://chinagz2018-my.sharepoint.com/:u:/g/personal/ylx_chinagz2018_onmicrosoft_com/ESP6BPY8mhhOn6S3TJQEUdQBOVRbrQ_Sy5T681epEc6c7g?download=1
+				wget -N -O kernel-c7.rpm https://chinagz2018-my.sharepoint.com/:u:/g/personal/ylx_chinagz2018_onmicrosoft_com/Ed_0whzp_VRCkw2oJbXR0W0BFGep10U3-Lridbqwe9Lv5g?download=1
 
 				yum install -y kernel-c7.rpm
 				yum install -y kernel-headers-c7.rpm
 			
-				kernel_version="5.5.7"
+				kernel_version="5.5.10"
 			else
 				echo -e "${Error} 还在用32位内核，别再见了 !" && exit 1
 			fi	
@@ -90,13 +90,13 @@ installbbr(){
 				fi
 			elif [[ ${version} = "10" ]]; then
 				if [[ ${bit} = "x86_64" ]]; then
-					wget -N -O linux-image-d10.deb https://github.com/ylx2016/kernel/releases/download/5.5.7/linux-image-5.5.7_5.5.7-1-d10_amd64.deb
-					wget -N -O linux-headers-d10.deb https://github.com/ylx2016/kernel/releases/download/5.5.7/linux-headers-5.5.7_5.5.7-1-d10_amd64.deb
+					wget -N -O linux-image-d10.deb https://chinagz2018-my.sharepoint.com/:u:/g/personal/ylx_chinagz2018_onmicrosoft_com/EY8ps95tSZhAkdbZeaEsMNsBbAbfHeUS0Hzc4Hk2Vr-QMQ?download=1
+					wget -N -O linux-headers-d10.deb https://chinagz2018-my.sharepoint.com/:u:/g/personal/ylx_chinagz2018_onmicrosoft_com/EVkOIxa9afBJm0ouo9XZzDkBVl10vSMMgrd58WUHTJdvfQ?download=1
 				
 					dpkg -i linux-image-d10.deb
 					dpkg -i linux-headers-d10.deb
 				
-					kernel_version="5.5.7"
+					kernel_version="5.5.10"
 				else
 					echo -e "${Error} 还在用32位内核，别再见了 !" && exit 1
 				fi
@@ -170,7 +170,7 @@ installbbr(){
 	#echo -e "${Tip} 内核安装完毕，请参考上面的信息检查是否安装成功及手动调整内核启动顺序"
 }
 
-#安装BBRplus内核
+#安装BBRplus内核 4.14.129
 installbbrplus(){
 	kernel_version="4.14.160-bbrplus"
 	bit=`uname -m`
@@ -255,13 +255,13 @@ installxanmod(){
 	if [[ "${release}" == "centos" ]]; then
 		if [[ ${version} = "7" ]]; then
 			if [[ ${bit} = "x86_64" ]]; then
-				wget -N -O kernel-c7.rpm https://github.com/ylx2016/kernel/releases/download/5.5.6/kernel-5.5.6_xanmod4-1-c7.x86_64.rpm
-				wget -N -O kernel-headers-c7.rpm https://github.com/ylx2016/kernel/releases/download/5.5.6/kernel-headers-5.5.6_xanmod4-1-c7.x86_64.rpm
+				wget -N -O kernel-c7.rpm https://chinagz2018-my.sharepoint.com/:u:/g/personal/ylx_chinagz2018_onmicrosoft_com/ES1FqBSXMZlJlPgYrSagBCUBb6N2_srwS_e59B2Y74Rksg?download=1
+				wget -N -O kernel-headers-c7.rpm https://chinagz2018-my.sharepoint.com/:u:/g/personal/ylx_chinagz2018_onmicrosoft_com/ERUwIDLM1XdDt4xxv13xJOkBfpaQby-u2XdEr3d9I6ixag?download=1
 				
 				yum install -y kernel-c7.rpm
 				yum install -y kernel-headers-c7.rpm
 			
-				kernel_version="5.5.6_xanmod4"
+				kernel_version="5.5.8_xanmod6"
 			else
 				echo -e "${Error} 还在用32位内核，别再见了 !" && exit 1
 			fi
@@ -290,13 +290,13 @@ installxanmod(){
 			fi	
 		elif [[ ${version} = "10" ]]; then
 			if [[ ${bit} = "x86_64" ]]; then
-				wget -N -O linux-headers-d10.deb https://github.com/ylx2016/kernel/releases/download/5.5.6/linux-headers-5.5.6-xanmod4_5.5.6-xanmod4-1-d10_amd64.deb
-				wget -N -O linux-image-d10.deb https://github.com/ylx2016/kernel/releases/download/5.5.6/linux-image-5.5.6-xanmod4_5.5.6-xanmod4-1-d10_amd64.deb
+				wget -N -O linux-headers-d10.deb https://chinagz2018-my.sharepoint.com/:u:/g/personal/ylx_chinagz2018_onmicrosoft_com/EcwO-0rZ3VlFjBNHYoVxy_IBgn2E_viwNx0l2fGHtRwyJw?download=1
+				wget -N -O linux-image-d10.deb https://chinagz2018-my.sharepoint.com/:u:/g/personal/ylx_chinagz2018_onmicrosoft_com/EcJBiKjxLp5Lq0tkTUlXcfEBH2wRr_n83jV4aVvii3q2Fg?download=1
 					
 				dpkg -i linux-image-d10.deb
 				dpkg -i linux-headers-d10.deb
 				
-				kernel_version="5.5.6-xanmod4"
+				kernel_version="5.5.8-xanmod6"
 			else
 				echo -e "${Error} 还在用32位内核，别再见了 !" && exit 1
 			fi		
@@ -380,7 +380,7 @@ installbbr2(){
 	BBR_grub
 	echo -e "${Tip} ${Red_font_prefix}请检查上面是否有内核信息，无内核千万别重启${Font_color_suffix}"
 	echo -e "${Tip} ${Red_font_prefix}rescue不是正常内核，要排除这个${Font_color_suffix}"
-	echo -e "${Tip} 重启VPS后，请重新运行脚本开启${Red_font_prefix}BBR${Font_color_suffix}"
+	echo -e "${Tip} 重启VPS后，请重新运行脚本开启${Red_font_prefix}BBR2${Font_color_suffix}"
 	stty erase '^H' && read -p "需要重启VPS后，才能开启BBR2，是否现在重启 ? [Y/n] :" yn
 	[ -z "${yn}" ] && yn="y"
 	if [[ $yn == [Yy] ]]; then
@@ -399,13 +399,13 @@ installzen(){
 	if [[ "${release}" == "centos" ]]; then
 		if [[ ${version} = "7" ]]; then
 			if [[ ${bit} = "x86_64" ]]; then
-				wget -N -O kernel-c7.rpm https://github.com/ylx2016/kernel/releases/download/5.5.6/kernel-5.5.6_zen1-1-c7.x86_64.rpm
-				wget -N -O kernel-headers-c7.rpm https://github.com/ylx2016/kernel/releases/download/5.5.6/kernel-headers-5.5.6_zen1-1-c7.x86_64.rpm
+				wget -N -O kernel-c7.rpm https://chinagz2018-my.sharepoint.com/:u:/g/personal/ylx_chinagz2018_onmicrosoft_com/EfQb4N8c2bxDlF3mj3SBVHIBGFSg_d1uR4LFzzT0Ii5FWA?download=1
+				wget -N -O kernel-headers-c7.rpm https://chinagz2018-my.sharepoint.com/:u:/g/personal/ylx_chinagz2018_onmicrosoft_com/EfKgMa8vsZBOt0zwXM_lHcUBOYlyH1CyRHrYSRJ5r6a0EQ?download=1
 				
 				yum install -y kernel-c7.rpm
 				yum install -y kernel-headers-c7.rpm
 			
-				kernel_version="5.5.6_zen"
+				kernel_version="5.5.10_zen"
 			else
 				echo -e "${Error} 还在用32位内核，别再见了 !" && exit 1
 			fi
@@ -434,13 +434,13 @@ installzen(){
 			fi	
 		elif [[ ${version} = "10" ]]; then
 			if [[ ${bit} = "x86_64" ]]; then
-				wget -N -O linux-headers-d10.deb https://github.com/ylx2016/kernel/releases/download/5.5.6/linux-headers-5.5.6-zen1_5.5.6-zen1-1-d10_amd64.deb
-				wget -N -O linux-image-d10.deb https://github.com/ylx2016/kernel/releases/download/5.5.6/linux-image-5.5.6-zen1_5.5.6-zen1-1-d10_amd64.deb
+				wget -N -O linux-headers-d10.deb https://chinagz2018-my.sharepoint.com/:u:/g/personal/ylx_chinagz2018_onmicrosoft_com/EShzFq8Jlv1PthbYlNNvLjIB2-hktrkPXxwd9mqcXgmcyg?download=1
+				wget -N -O linux-image-d10.deb https://chinagz2018-my.sharepoint.com/:u:/g/personal/ylx_chinagz2018_onmicrosoft_com/ERXzOc-2BzJInOxBgKo62OkBgcI9-O-fw0M8U2B4NazuLg?download=1
 					
 				dpkg -i linux-image-d10.deb
 				dpkg -i linux-headers-d10.deb
 				
-				kernel_version="5.5.6-zen"
+				kernel_version="5.5.10-zen"
 			else
 				echo -e "${Error} 还在用32位内核，别再见了 !" && exit 1
 			fi		
@@ -453,13 +453,65 @@ installzen(){
 	echo -e "${Tip} ${Red_font_prefix}请检查上面是否有内核信息，无内核千万别重启${Font_color_suffix}"
 	echo -e "${Tip} ${Red_font_prefix}rescue不是正常内核，要排除这个${Font_color_suffix}"
 	echo -e "${Tip} 重启VPS后，请重新运行脚本开启${Red_font_prefix}BBR${Font_color_suffix}"
-	stty erase '^H' && read -p "需要重启VPS后，才能开启BBR2，是否现在重启 ? [Y/n] :" yn
+	stty erase '^H' && read -p "需要重启VPS后，才能开启BBR，是否现在重启 ? [Y/n] :" yn
 	[ -z "${yn}" ] && yn="y"
 	if [[ $yn == [Yy] ]]; then
 		echo -e "${Info} VPS 重启中..."
 		reboot
 	fi
 	#echo -e "${Tip} 内核安装完毕，请参考上面的信息检查是否安装成功及手动调整内核启动顺序"
+}
+
+#安装bbrplus 新内核
+installbbrplusnew(){
+	kernel_version="4.14.173-bbrplus"
+	bit=`uname -m`
+	rm -rf bbrplusnew
+	mkdir bbrplusnew && cd bbrplusnew
+	if [[ "${release}" == "centos" ]]; then
+		if [[ ${version} = "7" ]]; then
+			if [[ ${bit} = "x86_64" ]]; then
+				wget -N -O kernel-c7.rpm https://chinagz2018-my.sharepoint.com/:u:/g/personal/ylx_chinagz2018_onmicrosoft_com/EWu6fCx32KxEvBrWqe5pZbAB6Y13ogTMfMfPnQWzfQpmiQ?download=1
+				wget -N -O kernel-headers-c7.rpm https://chinagz2018-my.sharepoint.com/:u:/g/personal/ylx_chinagz2018_onmicrosoft_com/EZVCeWQA8rdMrNMysFO2V_0BJWB6Mlrc-IzLD_Xni4HuTQ?download=1
+				
+				yum install -y kernel-c7.rpm
+				yum install -y kernel-headers-c7.rpm
+			
+				kernel_version="4.14.173_bbrplus"
+			else
+				echo -e "${Error} 还在用32位内核，别再见了 !" && exit 1
+			fi
+		fi
+	elif [[ "${release}" == "debian" ]]; then
+		if [[ ${version} = "10" ]]; then
+			if [[ ${bit} = "x86_64" ]]; then
+				wget -N -O linux-headers-d10.deb https://chinagz2018-my.sharepoint.com/:u:/g/personal/ylx_chinagz2018_onmicrosoft_com/ERSKfg1XkUJImM9fWZ3N8WwB3ygLGBzAT3-2Qf37UOokcw?download=1
+				wget -N -O linux-image-d10.deb https://chinagz2018-my.sharepoint.com/:u:/g/personal/ylx_chinagz2018_onmicrosoft_com/EeSISwYaxadNr81olVZh_usBHwvnt0J6W__-4nV-AKY9HQ?download=1
+					
+				dpkg -i linux-image-d10.deb
+				dpkg -i linux-headers-d10.deb
+				
+				kernel_version="4.14.173-bbrplus"
+			else
+				echo -e "${Error} 还在用32位内核，别再见了 !" && exit 1
+			fi		
+		fi			
+	fi
+
+	cd .. && rm -rf bbrplusnew
+	detele_kernel
+	BBR_grub
+	echo -e "${Tip} ${Red_font_prefix}请检查上面是否有内核信息，无内核千万别重启${Font_color_suffix}"
+	echo -e "${Tip} ${Red_font_prefix}rescue不是正常内核，要排除这个${Font_color_suffix}"
+	echo -e "${Tip} 重启VPS后，请重新运行脚本开启${Red_font_prefix}BBRplus${Font_color_suffix}"
+	stty erase '^H' && read -p "需要重启VPS后，才能开启BBRplus，是否现在重启 ? [Y/n] :" yn
+	[ -z "${yn}" ] && yn="y"
+	if [[ $yn == [Yy] ]]; then
+		echo -e "${Info} VPS 重启中..."
+		reboot
+	fi
+	#echo -e "${Tip} 内核安装完毕，请参考上面的信息检查是否安装成功及手动调整内核启动顺序"
+
 }
 
 #启用BBR+fq
@@ -681,16 +733,18 @@ gototcpx(){
 start_menu(){
 clear
 echo && echo -e " TCP加速 一键安装管理脚本 ${Red_font_prefix}[v${sh_ver}]${Font_color_suffix}
+ 更新内容及反馈:  https://blog.ylx.me/archives/783.html
   
  ${Green_font_prefix}0.${Font_color_suffix} 升级脚本
  ${Green_font_prefix}9.${Font_color_suffix} 切换到不卸载内核版本
 ————————————内核管理————————————
- ${Green_font_prefix}1.${Font_color_suffix} 安装 BBR原版内核 - 5.4.14/5.5.5/5.5.7
+ ${Green_font_prefix}1.${Font_color_suffix} 安装 BBR原版内核 - 5.4.14/5.5.5/5.5.10
  ${Green_font_prefix}2.${Font_color_suffix} 安装 BBRplus版内核 - 4.14.129
  ${Green_font_prefix}3.${Font_color_suffix} 安装 Lotserver(锐速)内核 - 多种
- ${Green_font_prefix}4.${Font_color_suffix} 安装 xanmod版内核 - 5.5.1/5.5.6
+ ${Green_font_prefix}4.${Font_color_suffix} 安装 xanmod版内核 - 5.5.1/5.5.8
  ${Green_font_prefix}5.${Font_color_suffix} 安装 BBR2测试版内核 - 5.4.0
- ${Green_font_prefix}6.${Font_color_suffix} 安装 Zen版内核 - 5.5.2/5.5.6
+ ${Green_font_prefix}6.${Font_color_suffix} 安装 Zen版内核 - 5.5.2/5.5.10
+ ${Green_font_prefix}7.${Font_color_suffix} 安装 BBRplus新版内核 - 4.14.173
 ————————————加速管理————————————
  ${Green_font_prefix}11.${Font_color_suffix} 使用BBR+FQ加速
  ${Green_font_prefix}12.${Font_color_suffix} 使用BBR+CAKE加速 
@@ -739,6 +793,9 @@ case "$num" in
 	;;
 	6)
 	check_sys_zen
+	;;
+	7)
+	check_sys_bbrplusnew	
 	;;
 	9)
 	gototcpx
@@ -829,12 +886,19 @@ BBR_grub(){
             fi
             sed -i 's/^default=.*/default=0/g' /boot/grub/grub.conf
         elif [[ ${version} = "7" ]]; then
-            if [ ! -f "/boot/grub2/grub.cfg" ]; then
-                echo -e "${Error} /boot/grub2/grub.cfg 找不到，请检查."
-                exit 1
+            if [ -f "/boot/grub2/grub.cfg" ]; then
+				grub2-mkconfig  -o   /boot/grub2/grub.cfg
+				grub2-set-default 0
+				exit 1
+			elif [ -f "/boot/efi/EFI/centos/grub.cfg" ]; then
+				grub2-mkconfig  -o   /boot/efi/EFI/centos/grub.cfg
+				grub2-set-default 0
+				exit 1
+			else
+				echo -e "${Error} grub.cfg 找不到，请检查."
             fi
-			grub2-mkconfig  -o   /boot/grub2/grub.cfg
-			grub2-set-default 0
+			#grub2-mkconfig  -o   /boot/grub2/grub.cfg
+			#grub2-set-default 0
 		
 		elif [[ ${version} = "8" ]]; then
 			grub2-mkconfig  -o   /boot/grub2/grub.cfg
@@ -942,6 +1006,25 @@ check_sys_bbrplus(){
 		fi
 	else
 		echo -e "${Error} BBRplus内核不支持当前系统 ${release} ${version} ${bit} !" && exit 1
+	fi
+}
+
+check_sys_bbrplusnew(){
+	check_version
+	if [[ "${release}" == "centos" ]]; then
+		if [[ ${version} = "7" ]]; then
+			installbbrplusnew
+		else
+			echo -e "${Error} BBRplusNew内核不支持当前系统 ${release} ${version} ${bit} !" && exit 1
+		fi
+	elif [[ "${release}" == "debian" ]]; then
+		if [[ ${version} = "10" ]]; then
+			installbbrplusnew
+		else
+			echo -e "${Error} BBRplusNew内核不支持当前系统 ${release} ${version} ${bit} !" && exit 1
+		fi
+	else
+		echo -e "${Error} BBRplusNew内核不支持当前系统 ${release} ${version} ${bit} !" && exit 1
 	fi
 }
 
