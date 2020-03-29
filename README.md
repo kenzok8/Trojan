@@ -1,4 +1,4 @@
-﻿#### Trojan one key
+#### Trojan one key
 
 
 ##### 说明
@@ -25,6 +25,9 @@
 ```bash
 bash <(curl -s -L https://git.io/Jvc32)
 ```
+![Trojan脚本运行](https://github.com/kenzok8/Trojan/blob/master/sshot/4.png)
+![Trojan脚本运行](https://github.com/kenzok8/Trojan/blob/master/sshot/sshot-1.png)
+
 - atrandys+BBR脚本
 
 ```bash
@@ -42,6 +45,9 @@ cd /usr/src && wget -N --no-check-certificate "https://git.io/Jvc36" && chmod +x
 bash <(curl -L -s -k "https://git.io/Jvc36")
 ```
 ![BBR脚本运行](https://github.com/kenzok8/Trojan/blob/master/sshot/3.png)
+![BBR脚本运行](https://github.com/kenzok8/Trojan/blob/master/sshot/sshot-3.png)
+![BBR脚本运行](https://github.com/kenzok8/Trojan/blob/master/sshot/sshot-8.png)
+
 
 
 ##### 注意
@@ -90,5 +96,8 @@ systemctl enable trojan   #设置 Trojan 为开机自启
  - 地址 https://www.cloudflare.com/
 
 ![cf设置截图](https://github.com/kenzok8/Trojan/blob/master/sshot/sshot-4.png)
+
+
+
 
 
