@@ -1,4 +1,4 @@
-#### Trojan one key
+﻿#### Trojan one key
 
 
 ##### 说明
@@ -18,6 +18,8 @@
 
 ##### Trojan一键安装脚本二选一:
 
+- atrandys脚本修改
+
 ```bash
 curl -O https://git.io/Jvc32 && chmod +x mu.sh && ./mu.sh
 ```
@@ -26,7 +28,7 @@ curl -O https://git.io/Jvc32 && chmod +x mu.sh && ./mu.sh
 ```bash
 bash <(curl -s -L https://git.io/Jvc32)
 ```
-- atrandys脚本修改
+- atrandys+BBR脚本
 
 ```bash
 bash <(curl -s -L https://git.io/Jvcyx)
