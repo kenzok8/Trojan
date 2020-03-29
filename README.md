@@ -6,10 +6,12 @@
 - 脚本会自动获取最新Trojan程序
 
 - vps上需要安装curl  Ubuntu/Debian 系统安装 Curl 方法
+
 ```bash
  apt-get update -y && apt-get install curl -y    
 ```
 - Centos 系统安装 Curl 方法
+
 ```bash
   yum update -y && yum install curl -y            
 ```
