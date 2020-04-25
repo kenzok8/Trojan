@@ -422,7 +422,7 @@ function update_trojan(){
 start_menu(){
     clear
     green " ======================================="
-    green " 介绍：一键安装trojan 3月29日更新"
+    green " 介绍：一键安装trojan 4月25日更新"
     green " 系统：centos7+/debian9+/ubuntu16.04+"
     cyan " *请不要在任何生产环境使用此脚本"
     cyan " *请不要有其他程序占用80和443端口"
