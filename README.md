@@ -18,7 +18,10 @@
 - 80端口被Nginx点用使用命令 service nginx stop 停用
 
 
+##### trojan-go一键二合一脚本
+
 项目地址 https://github.com/p4gefau1t/trojan-go
+
 
 - trojan-go多路复用，降低延迟，提升并发性能
 
