@@ -3,7 +3,6 @@
 #	System Required: :Debian 9+/Ubuntu 18.04+/Centos 7+
 #	Description: Trojan&V2ray&SSR script
 #	Version: 1.0.0
-#	Author: Jeannie
 #	来自珍妮姐的Trojan-go脚本
 # Official document: www.v2ray.com
 #=================================================
@@ -973,7 +972,7 @@ uninstall_all(){
 main() {
   echo -e "
 ${FUCHSIA}===================================================
-${GREEN}Trojan-go二合一脚本(authored by Jeannie)
+${GREEN}Trojan-go二合一脚本
 ${FUCHSIA}===================================================
 ${GREEN}如果已经安装了下列脚本之一，想要安装其他的，不需要单独执行卸载，直接选择想要安装脚本对应的数字即可……
 ${GREEN}因为安装的同时会执行卸载，除非想卸载干净回到初始状态,可以执行3……
