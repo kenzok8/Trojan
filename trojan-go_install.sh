@@ -681,7 +681,7 @@ web_download() {
       ${Info}12. https://templated.co/grassygrass
       ${Info}13. https://templated.co/breadth
       ${Info}14. https://templated.co/undeviating
-      ${Info}15. https://templated.co/lorikeet"
+      ${Info}15. https://templated.co/breadth"
     read -rp "$(echo -e "${Tip}请输入你要下载的网站的数字:")" aNum
     case $aNum in
     1)
