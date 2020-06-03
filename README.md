@@ -18,6 +18,17 @@
 - 80端口被Nginx点用使用命令 service nginx stop 停用
 
 
+项目地址 https://github.com/p4gefau1t/trojan-go
+
+- trojan-go多路复用，降低延迟，提升并发性能
+
+- trojan-go一键脚本支持CDN流量中转等
+
+```bash
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/kenzok8/Trojan/master/trojan-go_install.sh)"
+```
+
+
 ##### Trojan一键安装脚本二选一:
 
 - atrandys脚本修改
