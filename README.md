@@ -80,15 +80,6 @@ bash <(curl -L -s -k "https://git.io/Jvc36")
 
 ##### 结尾
 
-- 电脑上其他软件如何使用 Trojan
-
-1、如果软件支持配置 socks5，直接指向 127.0.0.1:1080 即可。
-
-2、如果软件不支持配置 socks5，可选择 sstap/sockscap64/supercap 等软件，曲线实现代理。
-
-3、[mellow github地址](https://github.com/mellow-io/mellow/releases)工具可以实现分流
-
-
 - 服务端怎么修改密码
 
 trojan 服务端配置文件路径如下，如需修改内容，修改以下文件即可。
