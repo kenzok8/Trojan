@@ -19,6 +19,7 @@
 
 #include "config.h"
 #include <cstdlib>
+#include <cstdio>
 #include <sstream>
 #include <stdexcept>
 #include <boost/property_tree/json_parser.hpp>
@@ -159,7 +160,7 @@ string Config::SHA224(const string &message) {
     }
 
     for (unsigned int i = 0; i < digest_len; ++i) {
-        sprintf(mdString + (i << 1), "%02x", (unsigned int)digest[i]);
+        snprintf(mdString + (i << 1), sizeof(mdString) - (i << 1), "%02x", (unsigned int)digest[i]);
     }
     mdString[digest_len << 1] = '\0';
     EVP_MD_CTX_free(ctx);
