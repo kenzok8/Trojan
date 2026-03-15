@@ -27,3 +27,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md).
 ## License
 
 [GPLv3](LICENSE)
+
+## kenzok8 maintenance
+
+This fork is actively maintained by kenzok8 with independent release cadence.
