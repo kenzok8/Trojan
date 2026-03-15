@@ -31,3 +31,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md).
 ## kenzok8 maintenance
 
 This fork is actively maintained by kenzok8 with independent release cadence.
+
+## Maintainer release cadence
+
+This repository follows kenzok8 maintainer iteration releases (semantic bumps with package sync + build verification).
