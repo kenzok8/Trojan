@@ -28,7 +28,7 @@ if(MSVC)
     add_definitions(-DBOOST_DATE_TIME_NO_LIB)
 endif()
 
-find_package(OpenSSL 1.1.0 REQUIRED)
+find_package(OpenSSL 1.1.1 REQUIRED)
 target_include_directories(trojan PRIVATE ${OPENSSL_INCLUDE_DIR})
 target_link_libraries(trojan ${OPENSSL_LIBRARIES})
 if(OPENSSL_VERSION VERSION_GREATER_EQUAL 1.1.1)
