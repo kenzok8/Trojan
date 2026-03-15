@@ -23,7 +23,7 @@ using namespace std;
 using namespace boost::asio::ip;
 
 bool SOCKS5Address::parse(const string &data, size_t &address_len) {
-    if (data.length() == 0 || (data[0] != IPv4 && data[0] != DOMAINNAME && data[0] != IPv6)) {
+    if (data.empty() || (data[0] != IPv4 && data[0] != DOMAINNAME && data[0] != IPv6)) {
         return false;
     }
     address_type = static_cast<AddressType>(data[0]);

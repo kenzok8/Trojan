@@ -27,6 +27,16 @@
 using namespace std;
 using namespace boost::property_tree;
 
+namespace {
+const char* getenv_required(const char* key) {
+    const char* v = std::getenv(key);
+    if (v == nullptr) {
+        throw std::runtime_error(std::string("missing environment variable: ") + key);
+    }
+    return v;
+}
+}
+
 void Config::load(const string &filename) {
     ptree tree;
     read_json(filename, tree);
@@ -122,17 +132,17 @@ bool Config::sip003() {
     populate(JSON);
     switch (run_type) {
         case SERVER:
-            local_addr = getenv("SS_REMOTE_HOST");
-            local_port = atoi(getenv("SS_REMOTE_PORT"));
+            local_addr = getenv_required("SS_REMOTE_HOST");
+            local_port = static_cast<uint16_t>(std::atoi(getenv_required("SS_REMOTE_PORT")));
             break;
         case CLIENT:
         case NAT:
             throw runtime_error("SIP003 with wrong run_type");
         case FORWARD:
-            remote_addr = getenv("SS_REMOTE_HOST");
-            remote_port = atoi(getenv("SS_REMOTE_PORT"));
-            local_addr = getenv("SS_LOCAL_HOST");
-            local_port = atoi(getenv("SS_LOCAL_PORT"));
+            remote_addr = getenv_required("SS_REMOTE_HOST");
+            remote_port = static_cast<uint16_t>(std::atoi(getenv_required("SS_REMOTE_PORT")));
+            local_addr = getenv_required("SS_LOCAL_HOST");
+            local_port = static_cast<uint16_t>(std::atoi(getenv_required("SS_LOCAL_PORT")));
             break;
     }
     return true;

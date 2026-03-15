@@ -20,10 +20,14 @@
 import socket
 import ssl
 import sys
+import argparse
 
 def input_with_default(prompt, default):
     print('{} [{}]: '.format(prompt, default), file=sys.stderr, end='')
-    line = input()
+    try:
+        line = input()
+    except EOFError:
+        return default
     return line if line else default
 
 def main(argc, argv):
@@ -42,9 +46,13 @@ def main(argc, argv):
     ctx = ssl.create_default_context()
     ctx.check_hostname = False
     ctx.verify_mode = ssl.CERT_NONE
-    with socket.create_connection((hostname, port)) as sock:
-        with ctx.wrap_socket(sock, server_hostname=hostname) as ssock:
-            print(ssl.DER_cert_to_PEM_cert(ssock.getpeercert(True)), end='')
+    try:
+        with socket.create_connection((hostname, port), timeout=10) as sock:
+            with ctx.wrap_socket(sock, server_hostname=hostname) as ssock:
+                print(ssl.DER_cert_to_PEM_cert(ssock.getpeercert(True)), end='')
+    except Exception as e:
+        print(f'error: {e}', file=sys.stderr)
+        sys.exit(2)
 
 if __name__ == '__main__':
     main(len(sys.argv), sys.argv)
