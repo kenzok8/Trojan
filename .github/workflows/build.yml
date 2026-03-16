@@ -1,0 +1,30 @@
+name: Build
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build:
+    name: Linux
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get install -y \
+            build-essential cmake \
+            libboost-system-dev libboost-program-options-dev \
+            libssl-dev
+
+      - name: configure
+        run: |
+          cmake -B build \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DENABLE_MYSQL=OFF
+
+      - name: build
+        run: cmake --build build -j$(nproc)
