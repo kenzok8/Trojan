@@ -66,6 +66,6 @@ All connection without correct structure and password will be redirected to a pr
 
 Because the traffic is protected by `TLS` (it is users' responsibility to use a valid certificate), if you are visiting an `HTTP` site, the traffic looks the same as `HTTPS` (there is only one `RTT` after `TLS` handshake); if you are not visiting an `HTTP` site, then the traffic looks the same as `HTTPS` kept alive or `WebSocket`. Because of this, trojan can also bypass ISP `QoS` limitations.
 
-For more information, go to [Issue #14](https://github.com/trojan-gfw/trojan/issues/14).
+For more information, go to [Issue #14](https://github.com/kenzok8/trojan/issues/14).
 
 [Homepage](.) | [Prev Page](overview) | [Next Page](config)

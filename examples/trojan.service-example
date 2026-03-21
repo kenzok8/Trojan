@@ -1,6 +1,6 @@
 [Unit]
 Description=trojan
-Documentation=man:trojan(1) https://trojan-gfw.github.io/trojan/config https://trojan-gfw.github.io/trojan/
+Documentation=man:trojan(1) https://github.com/kenzok8/trojan/blob/master/docs/config.md https://github.com/kenzok8/trojan/tree/master/docs
 After=network.target network-online.target nss-lookup.target mysql.service mariadb.service mysqld.service
 
 [Service]

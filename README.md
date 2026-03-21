@@ -1,6 +1,6 @@
 # trojan
 
-[![Build Status](https://dev.azure.com/GreaterFire/Trojan-GFW/_apis/build/status/trojan-gfw.trojan?branchName=master)](https://dev.azure.com/GreaterFire/Trojan-GFW/_build/latest?definitionId=5&branchName=master)
+[![Build](https://github.com/kenzok8/trojan/actions/workflows/build.yml/badge.svg)](https://github.com/kenzok8/trojan/actions/workflows/build.yml)
 
 An unidentifiable mechanism that helps you bypass GFW.
 
@@ -10,8 +10,8 @@ Trojan is not a fixed program or protocol. It's an idea, an idea that imitating 
 
 ## Documentations
 
-An online documentation can be found [here](https://trojan-gfw.github.io/trojan/).  
-Installation guide on various platforms can be found in the [wiki](https://github.com/trojan-gfw/trojan/wiki/Binary-&-Package-Distributions).
+An online documentation can be found in the local [`docs/`](docs) directory.  
+Installation guide on various platforms can be found in the [wiki](https://github.com/kenzok8/trojan/wiki/Binary-&-Package-Distributions).
 
 ## Contributing
 
