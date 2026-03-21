@@ -299,23 +299,11 @@ Service::Service(Config &config, bool test) :
     if (!test) {
         tcp::resolver resolver(io_context);
         tcp::endpoint listen_endpoint = *resolver.resolve(config.local_addr, to_string(config.local_port)).begin();
-        socket_acceptor.open(listen_endpoint.protocol());
-        socket_acceptor.set_option(tcp::acceptor::reuse_address(true));
-
-        if (config.tcp.reuse_port) {
-#ifdef ENABLE_REUSE_PORT
-            socket_acceptor.set_option(reuse_port(true));
-#else  // ENABLE_REUSE_PORT
-            Log::log_with_date_time("SO_REUSEPORT is not supported", Log::WARN);
-#endif // ENABLE_REUSE_PORT
-        }
-
+        configure_tcp_acceptor(listen_endpoint);
         socket_acceptor.bind(listen_endpoint);
         socket_acceptor.listen();
         if (config.run_type == Config::FORWARD) {
-            auto udp_bind_endpoint = udp::endpoint(listen_endpoint.address(), listen_endpoint.port());
-            udp_socket.open(udp_bind_endpoint.protocol());
-            udp_socket.bind(udp_bind_endpoint);
+            configure_forward_udp_socket(listen_endpoint);
         }
     }
     Log::level = config.log_level;
@@ -343,18 +331,7 @@ Service::Service(Config &config, bool test) :
         if (config.tcp.keep_alive) {
             socket_acceptor.set_option(boost::asio::socket_base::keep_alive(true));
         }
-        if (config.tcp.fast_open) {
-#ifdef TCP_FASTOPEN
-            using fastopen = boost::asio::detail::socket_option::integer<IPPROTO_TCP, TCP_FASTOPEN>;
-            boost::system::error_code ec;
-            socket_acceptor.set_option(fastopen(config.tcp.fast_open_qlen), ec);
-#else // TCP_FASTOPEN
-            Log::log_with_date_time("TCP_FASTOPEN is not supported", Log::WARN);
-#endif // TCP_FASTOPEN
-#ifndef TCP_FASTOPEN_CONNECT
-            Log::log_with_date_time("TCP_FASTOPEN_CONNECT is not supported", Log::WARN);
-#endif // TCP_FASTOPEN_CONNECT
-        }
+        configure_fast_open();
     }
     if (Log::keylog) {
 #ifdef ENABLE_SSL_KEYLOG
@@ -381,6 +358,43 @@ void Service::run() {
 
 std::string Service::run_type_name() const {
     return run_type_to_string(config);
+}
+
+void Service::configure_tcp_acceptor(const tcp::endpoint &listen_endpoint) {
+    socket_acceptor.open(listen_endpoint.protocol());
+    socket_acceptor.set_option(tcp::acceptor::reuse_address(true));
+
+    if (config.tcp.reuse_port) {
+#ifdef ENABLE_REUSE_PORT
+        socket_acceptor.set_option(reuse_port(true));
+#else
+        Log::log_with_date_time("SO_REUSEPORT is not supported", Log::WARN);
+#endif
+    }
+}
+
+void Service::configure_forward_udp_socket(const tcp::endpoint &listen_endpoint) {
+    auto udp_bind_endpoint = udp::endpoint(listen_endpoint.address(), listen_endpoint.port());
+    udp_socket.open(udp_bind_endpoint.protocol());
+    udp_socket.bind(udp_bind_endpoint);
+}
+
+void Service::configure_fast_open() {
+    if (!config.tcp.fast_open) {
+        return;
+    }
+
+#ifdef TCP_FASTOPEN
+    using fastopen = boost::asio::detail::socket_option::integer<IPPROTO_TCP, TCP_FASTOPEN>;
+    boost::system::error_code ec;
+    socket_acceptor.set_option(fastopen(config.tcp.fast_open_qlen), ec);
+#else
+    Log::log_with_date_time("TCP_FASTOPEN is not supported", Log::WARN);
+#endif
+
+#ifndef TCP_FASTOPEN_CONNECT
+    Log::log_with_date_time("TCP_FASTOPEN_CONNECT is not supported", Log::WARN);
+#endif
 }
 
 void Service::stop() {

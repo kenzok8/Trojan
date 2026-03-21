@@ -45,6 +45,9 @@ private:
     uint8_t udp_read_buf[MAX_LENGTH]{};
     boost::asio::ip::udp::endpoint udp_recv_endpoint;
     std::string run_type_name() const;
+    void configure_tcp_acceptor(const boost::asio::ip::tcp::endpoint &listen_endpoint);
+    void configure_forward_udp_socket(const boost::asio::ip::tcp::endpoint &listen_endpoint);
+    void configure_fast_open();
     void async_accept();
     void udp_async_read();
 public:
