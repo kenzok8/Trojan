@@ -128,6 +128,36 @@ void configure_session_cache_for_client(SSL_CTX *native_context, const Config::S
     }
 }
 
+std::string load_plain_http_response(const std::string &path) {
+    if (path.empty()) {
+        return {};
+    }
+
+    ifstream ifs(path, ios::binary);
+    if (!ifs.is_open()) {
+        throw runtime_error(path + ": " + strerror(errno));
+    }
+    return string(istreambuf_iterator<char>(ifs), istreambuf_iterator<char>());
+}
+
+void configure_server_dhparams(boost::asio::ssl::context &ssl_context, const Config::SSLConfig &ssl_config) {
+    if (ssl_config.dhparam.empty()) {
+        ssl_context.use_tmp_dh(boost::asio::const_buffer(SSLDefaults::g_dh2048_sz, SSLDefaults::g_dh2048_sz_size));
+        return;
+    }
+
+    ssl_context.use_tmp_dh_file(ssl_config.dhparam);
+}
+
+void configure_client_verify_store(boost::asio::ssl::context &ssl_context, SSL_CTX *native_context, const Config::SSLConfig &ssl_config) {
+    if (ssl_config.cert.empty()) {
+        ssl_context.set_default_verify_paths();
+        load_platform_root_certificates(native_context);
+    } else {
+        ssl_context.load_verify_file(ssl_config.cert);
+    }
+}
+
 void configure_server_ssl_context(boost::asio::ssl::context &ssl_context, SSL_CTX *native_context, Config &config, std::string &plain_http_response) {
     ssl_context.use_certificate_chain_file(config.ssl.cert);
     ssl_context.set_password_callback([&config](size_t, context_base::password_purpose) {
@@ -141,20 +171,8 @@ void configure_server_ssl_context(boost::asio::ssl::context &ssl_context, SSL_CT
 
     configure_alpn_server(native_context, config);
     configure_session_cache_for_server(native_context, config.ssl);
-
-    if (!config.ssl.plain_http_response.empty()) {
-        ifstream ifs(config.ssl.plain_http_response, ios::binary);
-        if (!ifs.is_open()) {
-            throw runtime_error(config.ssl.plain_http_response + ": " + strerror(errno));
-        }
-        plain_http_response = string(istreambuf_iterator<char>(ifs), istreambuf_iterator<char>());
-    }
-
-    if (config.ssl.dhparam.empty()) {
-        ssl_context.use_tmp_dh(boost::asio::const_buffer(SSLDefaults::g_dh2048_sz, SSLDefaults::g_dh2048_sz_size));
-    } else {
-        ssl_context.use_tmp_dh_file(config.ssl.dhparam);
-    }
+    plain_http_response = load_plain_http_response(config.ssl.plain_http_response);
+    configure_server_dhparams(ssl_context, config.ssl);
 }
 
 void configure_client_verify(boost::asio::ssl::context &ssl_context, SSL_CTX *native_context, Config &config) {
@@ -164,12 +182,7 @@ void configure_client_verify(boost::asio::ssl::context &ssl_context, SSL_CTX *na
     }
 
     ssl_context.set_verify_mode(verify_peer);
-    if (config.ssl.cert.empty()) {
-        ssl_context.set_default_verify_paths();
-        load_platform_root_certificates(native_context);
-    } else {
-        ssl_context.load_verify_file(config.ssl.cert);
-    }
+    configure_client_verify_store(ssl_context, native_context, config.ssl);
 
     if (config.ssl.verify_hostname) {
 #if BOOST_VERSION >= 107300
