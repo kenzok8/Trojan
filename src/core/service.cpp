@@ -40,6 +40,21 @@ using namespace std;
 using namespace boost::asio::ip;
 using namespace boost::asio::ssl;
 
+namespace {
+std::string run_type_to_string(const Config &config) {
+    switch (config.run_type) {
+        case Config::SERVER:
+            return "server";
+        case Config::FORWARD:
+            return "forward";
+        case Config::NAT:
+            return "nat";
+        default:
+            return "client";
+    }
+}
+}
+
 #ifdef ENABLE_REUSE_PORT
 typedef boost::asio::detail::socket_option::boolean<SOL_SOCKET, SO_REUSEPORT> reuse_port;
 #endif // ENABLE_REUSE_PORT
@@ -123,7 +138,7 @@ Service::Service(Config &config, bool test) :
         }
         if (config.mysql.enabled) {
 #ifdef ENABLE_MYSQL
-            auth = new Authenticator(config);
+            auth = std::make_unique<Authenticator>(config);
 #else // ENABLE_MYSQL
             Log::log_with_date_time("MySQL is not supported", Log::WARN);
 #endif // ENABLE_MYSQL
@@ -140,10 +155,10 @@ Service::Service(Config &config, bool test) :
                 HCERTSTORE h_store = CertOpenSystemStore(0, _T("ROOT"));
                 if (h_store) {
                     X509_STORE *store = SSL_CTX_get_cert_store(native_context);
-                    PCCERT_CONTEXT p_context = NULL;
+                    PCCERT_CONTEXT p_context = nullptr;
                     while ((p_context = CertEnumCertificatesInStore(h_store, p_context))) {
                         const unsigned char *encoded_cert = p_context->pbCertEncoded;
-                        X509 *x509 = d2i_X509(NULL, &encoded_cert, p_context->cbCertEncoded);
+                        X509 *x509 = d2i_X509(nullptr, &encoded_cert, p_context->cbCertEncoded);
                         if (x509) {
                             X509_STORE_add_cert(store, x509);
                             X509_free(x509);
@@ -281,19 +296,13 @@ void Service::run() {
         udp_async_read();
     }
     tcp::endpoint local_endpoint = socket_acceptor.local_endpoint();
-    string rt;
-    if (config.run_type == Config::SERVER) {
-        rt = "server";
-    } else if (config.run_type == Config::FORWARD) {
-        rt = "forward";
-    } else if (config.run_type == Config::NAT) {
-        rt = "nat";
-    } else {
-        rt = "client";
-    }
-    Log::log_with_date_time(string("trojan service (") + rt + ") started at " + local_endpoint.address().to_string() + ':' + to_string(local_endpoint.port()), Log::WARN);
+    Log::log_with_date_time(string("trojan service (") + run_type_name() + ") started at " + local_endpoint.address().to_string() + ':' + to_string(local_endpoint.port()), Log::WARN);
     io_context.run();
     Log::log_with_date_time("trojan service stopped", Log::WARN);
+}
+
+std::string Service::run_type_name() const {
+    return run_type_to_string(config);
 }
 
 void Service::stop() {
@@ -388,12 +397,5 @@ void Service::reload_cert() {
         Log::log_with_date_time("certificate and private key reloaded", Log::WARN);
     } else {
         Log::log_with_date_time("cannot reload certificate and private key: wrong run_type", Log::ERROR);
-    }
-}
-
-Service::~Service() {
-    if (auth) {
-        delete auth;
-        auth = nullptr;
     }
 }
