@@ -47,7 +47,7 @@ typedef boost::asio::detail::socket_option::boolean<SOL_SOCKET, SO_REUSEPORT> re
 Service::Service(Config &config, bool test) :
     config(config),
     socket_acceptor(io_context),
-    ssl_context(context::sslv23),
+    ssl_context(context::tls),
     auth(nullptr),
     udp_socket(io_context) {
 #ifndef ENABLE_NAT
@@ -153,18 +153,18 @@ Service::Service(Config &config, bool test) :
                 }
 #endif // _WIN32
 #ifdef __APPLE__
-                SecKeychainSearchRef pSecKeychainSearch = NULL;
+                SecKeychainSearchRef pSecKeychainSearch = nullptr;
                 SecKeychainRef pSecKeychain;
                 OSStatus status = noErr;
-                X509 *cert = NULL;
+                X509 *cert = nullptr;
 
                 // Leopard and above store location
                 status = SecKeychainOpen ("/System/Library/Keychains/SystemRootCertificates.keychain", &pSecKeychain);
                 if (status == noErr) {
                     X509_STORE *store = SSL_CTX_get_cert_store(native_context);
-                    status = SecKeychainSearchCreateFromAttributes (pSecKeychain, kSecCertificateItemClass, NULL, &pSecKeychainSearch);
+                    status = SecKeychainSearchCreateFromAttributes (pSecKeychain, kSecCertificateItemClass, nullptr, &pSecKeychainSearch);
                      for (;;) {
-                        SecKeychainItemRef pSecKeychainItem = nil;
+                        SecKeychainItemRef pSecKeychainItem = nullptr;
 
                         status = SecKeychainSearchCopyNext (pSecKeychainSearch, &pSecKeychainItem);
                         if (status == errSecItemNotFound) {
@@ -174,14 +174,14 @@ Service::Service(Config &config, bool test) :
                         if (status == noErr) {
                             void *_pCertData;
                             UInt32 _pCertLength;
-                            status = SecKeychainItemCopyAttributesAndData (pSecKeychainItem, NULL, NULL, NULL, &_pCertLength, &_pCertData);
+                            status = SecKeychainItemCopyAttributesAndData (pSecKeychainItem, nullptr, nullptr, nullptr, &_pCertLength, &_pCertData);
 
-                            if (status == noErr && _pCertData != NULL) {
+                            if (status == noErr && _pCertData != nullptr) {
                                 unsigned char *ptr;
 
                                 ptr = (unsigned char *)_pCertData;       /*required because d2i_X509 is modifying pointer */
-                                cert = d2i_X509 (NULL, (const unsigned char **) &ptr, _pCertLength);
-                                if (cert == NULL) {
+                                cert = d2i_X509 (nullptr, (const unsigned char **) &ptr, _pCertLength);
+                                if (cert == nullptr) {
                                     continue;
                                 }
 
@@ -191,10 +191,10 @@ Service::Service(Config &config, bool test) :
                                 }
                                 X509_free (cert);
 
-                                status = SecKeychainItemFreeAttributesAndData (NULL, _pCertData);
+                                status = SecKeychainItemFreeAttributesAndData (nullptr, _pCertData);
                             }
                         }
-                        if (pSecKeychainItem != NULL) {
+                        if (pSecKeychainItem != nullptr) {
                             CFRelease (pSecKeychainItem);
                         }
                     }
