@@ -29,6 +29,8 @@
 #ifdef __APPLE__
 #include <Security/Security.h>
 #endif // __APPLE__
+#include <openssl/ssl.h>
+#include <openssl/x509.h>
 #include <openssl/opensslv.h>
 #include "session/serversession.h"
 #include "session/clientsession.h"
@@ -52,6 +54,89 @@ std::string run_type_to_string(const Config &config) {
         default:
             return "client";
     }
+}
+
+#ifdef _WIN32
+void load_windows_root_certificates(SSL_CTX *native_context) {
+    HCERTSTORE h_store = CertOpenSystemStore(0, _T("ROOT"));
+    if (!h_store) {
+        return;
+    }
+
+    X509_STORE *store = SSL_CTX_get_cert_store(native_context);
+    PCCERT_CONTEXT p_context = nullptr;
+    while ((p_context = CertEnumCertificatesInStore(h_store, p_context))) {
+        const unsigned char *encoded_cert = p_context->pbCertEncoded;
+        X509 *x509 = d2i_X509(nullptr, &encoded_cert, p_context->cbCertEncoded);
+        if (x509) {
+            X509_STORE_add_cert(store, x509);
+            X509_free(x509);
+        }
+    }
+
+    CertCloseStore(h_store, 0);
+}
+#endif // _WIN32
+
+#ifdef __APPLE__
+void load_macos_root_certificates(SSL_CTX *native_context) {
+    SecKeychainRef pSecKeychain = nullptr;
+    OSStatus status = SecKeychainOpen("/System/Library/Keychains/SystemRootCertificates.keychain", &pSecKeychain);
+    if (status != noErr) {
+        return;
+    }
+
+    SecKeychainSearchRef pSecKeychainSearch = nullptr;
+    status = SecKeychainSearchCreateFromAttributes(pSecKeychain, kSecCertificateItemClass, nullptr, &pSecKeychainSearch);
+    if (status != noErr) {
+        CFRelease(pSecKeychain);
+        return;
+    }
+
+    X509_STORE *store = SSL_CTX_get_cert_store(native_context);
+    for (;;) {
+        SecKeychainItemRef pSecKeychainItem = nullptr;
+        status = SecKeychainSearchCopyNext(pSecKeychainSearch, &pSecKeychainItem);
+        if (status == errSecItemNotFound) {
+            break;
+        }
+
+        if (status == noErr) {
+            void *_pCertData = nullptr;
+            UInt32 _pCertLength = 0;
+            status = SecKeychainItemCopyAttributesAndData(pSecKeychainItem, nullptr, nullptr, nullptr, &_pCertLength, &_pCertData);
+
+            if (status == noErr && _pCertData != nullptr) {
+                unsigned char *ptr = static_cast<unsigned char *>(_pCertData);
+                X509 *cert = d2i_X509(nullptr, const_cast<const unsigned char **>(&ptr), _pCertLength);
+                if (cert != nullptr) {
+                    if (!X509_STORE_add_cert(store, cert)) {
+                        X509_free(cert);
+                    } else {
+                        X509_free(cert);
+                    }
+                }
+                SecKeychainItemFreeAttributesAndData(nullptr, _pCertData);
+            }
+        }
+
+        if (pSecKeychainItem != nullptr) {
+            CFRelease(pSecKeychainItem);
+        }
+    }
+
+    CFRelease(pSecKeychainSearch);
+    CFRelease(pSecKeychain);
+}
+#endif // __APPLE__
+
+void load_platform_root_certificates(SSL_CTX *native_context) {
+#ifdef _WIN32
+    load_windows_root_certificates(native_context);
+#endif
+#ifdef __APPLE__
+    load_macos_root_certificates(native_context);
+#endif
 }
 }
 
@@ -151,72 +236,7 @@ Service::Service(Config &config, bool test) :
             ssl_context.set_verify_mode(verify_peer);
             if (config.ssl.cert.empty()) {
                 ssl_context.set_default_verify_paths();
-#ifdef _WIN32
-                HCERTSTORE h_store = CertOpenSystemStore(0, _T("ROOT"));
-                if (h_store) {
-                    X509_STORE *store = SSL_CTX_get_cert_store(native_context);
-                    PCCERT_CONTEXT p_context = nullptr;
-                    while ((p_context = CertEnumCertificatesInStore(h_store, p_context))) {
-                        const unsigned char *encoded_cert = p_context->pbCertEncoded;
-                        X509 *x509 = d2i_X509(nullptr, &encoded_cert, p_context->cbCertEncoded);
-                        if (x509) {
-                            X509_STORE_add_cert(store, x509);
-                            X509_free(x509);
-                        }
-                    }
-                    CertCloseStore(h_store, 0);
-                }
-#endif // _WIN32
-#ifdef __APPLE__
-                SecKeychainSearchRef pSecKeychainSearch = nullptr;
-                SecKeychainRef pSecKeychain;
-                OSStatus status = noErr;
-                X509 *cert = nullptr;
-
-                // Leopard and above store location
-                status = SecKeychainOpen ("/System/Library/Keychains/SystemRootCertificates.keychain", &pSecKeychain);
-                if (status == noErr) {
-                    X509_STORE *store = SSL_CTX_get_cert_store(native_context);
-                    status = SecKeychainSearchCreateFromAttributes (pSecKeychain, kSecCertificateItemClass, nullptr, &pSecKeychainSearch);
-                     for (;;) {
-                        SecKeychainItemRef pSecKeychainItem = nullptr;
-
-                        status = SecKeychainSearchCopyNext (pSecKeychainSearch, &pSecKeychainItem);
-                        if (status == errSecItemNotFound) {
-                            break;
-                        }
-
-                        if (status == noErr) {
-                            void *_pCertData;
-                            UInt32 _pCertLength;
-                            status = SecKeychainItemCopyAttributesAndData (pSecKeychainItem, nullptr, nullptr, nullptr, &_pCertLength, &_pCertData);
-
-                            if (status == noErr && _pCertData != nullptr) {
-                                unsigned char *ptr;
-
-                                ptr = (unsigned char *)_pCertData;       /*required because d2i_X509 is modifying pointer */
-                                cert = d2i_X509 (nullptr, (const unsigned char **) &ptr, _pCertLength);
-                                if (cert == nullptr) {
-                                    continue;
-                                }
-
-                                if (!X509_STORE_add_cert (store, cert)) {
-                                    X509_free (cert);
-                                    continue;
-                                }
-                                X509_free (cert);
-
-                                status = SecKeychainItemFreeAttributesAndData (nullptr, _pCertData);
-                            }
-                        }
-                        if (pSecKeychainItem != nullptr) {
-                            CFRelease (pSecKeychainItem);
-                        }
-                    }
-                    CFRelease (pSecKeychainSearch);
-                    CFRelease (pSecKeychain);
-                }
-#endif // __APPLE__
+                load_platform_root_certificates(native_context);
             } else {
                 ssl_context.load_verify_file(config.ssl.cert);
             }
